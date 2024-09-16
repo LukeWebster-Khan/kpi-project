@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { KPIContextProvider } from "./contexts/KPIContextProvider";
+import Background from "@/components/background";
+import Nav from "@/components/nav";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +31,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Background />
+        <h1 className="text-6xl text-white z-10 relative text-center pt-28">
+          KPI Team Data
+        </h1>
+        <Nav />
+        <KPIContextProvider>{children}</KPIContextProvider>
       </body>
     </html>
   );

@@ -36,7 +36,7 @@ export default function RootLayout({
           KPI Team Data
         </h1>
         <Nav />
-        <KPIContextProvider>{children}</KPIContextProvider>
+        {children}
       </body>
     </html>
   );

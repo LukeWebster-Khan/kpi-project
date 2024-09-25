@@ -4,7 +4,10 @@ import { useKPIContext } from "@/lib/hooks";
 import KpiChart from "./kpi-chart";
 
 export default function Details() {
-  const { individualKPI, kpiMeta } = useKPIContext();
+  const { individualKPI, kpiMeta, loading } = useKPIContext();
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="w-full bg-gray-100 p-4">
       {individualKPI ? (

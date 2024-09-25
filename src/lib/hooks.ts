@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { KPI_API_URL } from "./constants";
 import { KPIItemsContext } from "@/app/contexts/KPIContextProvider";
 import { FullKPI, KPImeta } from "./types";
+import { useQuery } from "@tanstack/react-query";
 
 // const fetchKPIs = async () => {
 //   const res = await fetch(`${KPI_API_URL}`);
@@ -16,38 +17,34 @@ import { FullKPI, KPImeta } from "./types";
 // };
 
 export const useFetchKPIs = (date?: string) => {
-  const [kpiMeta, setKpiMeta] = useState<KPImeta>(null); // Adjust type if you have a specific type for meta data
-  const [kpis, setKpis] = useState<FullKPI | null>(null);
-  const [loading, setLoading] = useState(true);
+  const fetchKPIs = async () => {
+    const url = date ? `${KPI_API_URL}?inmonth=${date}` : KPI_API_URL;
+    const res = await fetch(url);
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message);
+    }
+    const data = await res.json();
 
-  useEffect(() => {
-    const fetchKPIs = async () => {
-      try {
-        setLoading(true);
-        const url = date ? `${KPI_API_URL}?inmonth=${date}` : KPI_API_URL;
-        const res = await fetch(url);
-        if (!res.ok) {
-          const errorData = await res.json();
-          throw new Error(errorData.message);
-        }
-        const data = await res.json();
+    // Destructure data and omit the 'kpi' key
+    const { kpi, ...generalData } = data;
+    return { kpi, generalData };
+  };
 
-        // Destructure data and omit the 'kpi' key
-        const { kpi, ...generalData } = data;
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["kpis", date],
+    queryFn: fetchKPIs,
+    enabled: !!date,
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
 
-        setKpis(kpi); // Set the kpi data separately
-        setKpiMeta(generalData); // Set the rest of the data excluding 'kpi'
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchKPIs();
-  }, [date]);
-
-  return { kpiMeta, kpis, loading };
+  return {
+    kpis: data?.kpi || null,
+    kpiMeta: data?.generalData || null,
+    loading: isLoading,
+    error,
+  };
 };
 
 export function useKPIContext() {

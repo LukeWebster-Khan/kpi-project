@@ -42,12 +42,20 @@ export function KPIContextProvider({
     setSelectedDate(date);
   }
 
+  const [currentFilter, setCurrentFilter] = useState<string[]>([]);
+
+  function handleFilterChange(filter: string) {
+    setCurrentFilter([filter]);
+  }
+
   const contextValue = {
     kpis,
     loading,
     individualKPI: individualKPI ? individualKPI : null,
     numberOfSearchResults,
     kpiMeta,
+    currentFilter,
+    handleFilterChange,
     handleSidebarItemClick,
     handleDateChange,
   };

@@ -17,7 +17,7 @@ import { FullKPI, KPImeta } from "./types";
 
 export const useFetchKPIs = (date?: string) => {
   const [kpiMeta, setKpiMeta] = useState<KPImeta>(null); // Adjust type if you have a specific type for meta data
-  const [kpis, setKpis] = useState<FullKPI | null>(null);
+  const [kpis, setKpis] = useState<FullKPI[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

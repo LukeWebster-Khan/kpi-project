@@ -1,9 +1,8 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { KPI_API_URL } from "./constants";
 import { KPIItemsContext } from "@/app/contexts/KPIContextProvider";
-import { FullKPI, KPImeta } from "./types";
 import { useQuery } from "@tanstack/react-query";
 
 // const fetchKPIs = async () => {

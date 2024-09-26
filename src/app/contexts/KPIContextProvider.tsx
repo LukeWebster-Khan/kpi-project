@@ -7,10 +7,10 @@ type KPISContextType = {
   kpis: FullKPI[] | null;
   loading: boolean;
   kpiMeta: KPImeta;
-  currentFilter: string[];
+  // currentFilter: string[];
   individualKPI: FullKPI | null;
   numberOfSearchResults?: number;
-  handleFilterChange: (filter: string) => void;
+  // handleFilterChange: (filter: string) => void;
   handleSidebarItemClick: (kpi: FullKPI) => void;
   handleDateChange: (date: string) => void;
 };
@@ -42,20 +42,12 @@ export function KPIContextProvider({
     setSelectedDate(date);
   }
 
-  const [currentFilter, setCurrentFilter] = useState<string[]>([]);
-
-  function handleFilterChange(filter: string) {
-    setCurrentFilter([filter]);
-  }
-
   const contextValue = {
     kpis,
     loading,
     individualKPI: individualKPI ? individualKPI : null,
     numberOfSearchResults,
     kpiMeta,
-    currentFilter,
-    handleFilterChange,
     handleSidebarItemClick,
     handleDateChange,
   };

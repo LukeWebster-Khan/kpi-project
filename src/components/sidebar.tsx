@@ -18,7 +18,7 @@ export default function Sidebar() {
           <ListItems />
         </div>
       ) : (
-        <p>No KPIs available</p>
+        <p></p>
       )}
     </div>
   );

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { KPIContextProvider } from "./contexts/KPIContextProvider";
 import Background from "@/components/background";
 import Nav from "@/components/nav";
 

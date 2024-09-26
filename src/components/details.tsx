@@ -22,7 +22,7 @@ export default function Details() {
             <section>
               <p>
                 Display Month:{" "}
-                <span className="font-semibold">{kpiMeta.displaymonth}</span>
+                <span className="font-semibold">{kpiMeta?.displaymonth}</span>
               </p>
             </section>
           </div>

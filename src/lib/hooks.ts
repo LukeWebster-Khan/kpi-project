@@ -19,10 +19,10 @@ export const useFetchKPIs = (date?: string) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["kpis", date],
     queryFn: fetchKPIs,
-    enabled: !!date,
+    enabled: !!date, // only fetch if date is provided
     refetchOnWindowFocus: false,
     retry: false,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 5, // stale for 5 minutes
   });
 
   return {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Background from "@/components/background";
-import Nav from "@/components/nav";
+// import Nav from "@/components/nav";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,7 +34,7 @@ export default function RootLayout({
         <h1 className="text-6xl text-white z-10 relative text-center pt-28">
           KPI Team Data
         </h1>
-        <Nav />
+        {/* <Nav /> */}
         {children}
       </body>
     </html>
